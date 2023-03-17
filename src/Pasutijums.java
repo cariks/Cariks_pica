@@ -2,11 +2,13 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 public class Pasutijums extends JFrame {
@@ -100,6 +102,16 @@ public class Pasutijums extends JFrame {
 	    pizzaIzmers.add(cm40);
 	    pizzaIzmers.setBounds(560, 17, 100, 200);
 	    add(pizzaIzmers);
+	    
+	 // ------------Iespçja pievienot, dzest un apmaksât picu
+	    JPanel pievienotButton = new JPanel();
+
+	    pievienotButton.setLayout(new FlowLayout(FlowLayout.LEFT));
+	    pievienotButton.add(addPizza);
+	    pievienotButton.add(dzest);
+	    pievienotButton.add(apmaksat);
+	    pievienotButton.setBounds(580, 200, 120, 120);
+	    add(pievienotButton);
 
 	    
 	    //-------------Pasutijums loga iestatîjumi
@@ -110,5 +122,9 @@ public class Pasutijums extends JFrame {
 	    
 	    
 	}
+	
+	JButton dzest = new JButton("Dzçst picu");
+	JButton apmaksat = new JButton("Apmaksât");
+	JButton addPizza = new JButton("Pievienot picu");
 
 }
