@@ -27,6 +27,10 @@ public class Pasutijums extends JFrame {
 	  JCheckBoxMenuItem senes = new JCheckBoxMenuItem("Sçnes");
 	  JCheckBoxMenuItem extraSiers = new JCheckBoxMenuItem("Extra Siers");
 	  JCheckBoxMenuItem bbq = new JCheckBoxMenuItem("BBQ Mçrce");
+	  
+	  JCheckBoxMenuItem cm20 = new JCheckBoxMenuItem("20 santimetri");
+	  JCheckBoxMenuItem cm30 = new JCheckBoxMenuItem("30 santimetri");
+	  JCheckBoxMenuItem cm40 = new JCheckBoxMenuItem("40 santimetri");
 
 	  
 	public void veiktPasutijumu() {
@@ -80,6 +84,23 @@ public class Pasutijums extends JFrame {
 	    pizzaToppings.add(bbq);
 	    pizzaToppings.setBounds(420, 20, 100, 100);
 	    add(pizzaToppings);
+	    
+	 // ------------Picas izmçra izvçle
+	    JPanel pizzaIzmers = new JPanel();
+	    pizzaIzmers.setLayout(new FlowLayout());
+	    pizzaIzmers.add(new JLabel("Picas izmçrs"));
+	    ButtonGroup gp_cm = new ButtonGroup();
+
+	    gp_cm.add(cm20);
+	    gp_cm.add(cm30);
+	    gp_cm.add(cm40);
+
+	    pizzaIzmers.add(cm20);
+	    pizzaIzmers.add(cm30);
+	    pizzaIzmers.add(cm40);
+	    pizzaIzmers.setBounds(560, 17, 100, 200);
+	    add(pizzaIzmers);
+
 	    
 	    //-------------Pasutijums loga iestatîjumi
 	    setVisible(true);
