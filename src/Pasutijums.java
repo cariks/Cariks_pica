@@ -1,6 +1,7 @@
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -50,7 +51,12 @@ public class Pasutijums extends JFrame {
 	    JPanel pizzaTypes = new JPanel();
 	    pizzaTypes.setLayout(new GridLayout(5, 1));
 	    pizzaTypes.add(new JLabel("Picas veids"));
-
+	    
+	    ButtonGroup gp_type = new ButtonGroup(); // picas veidi grupa
+	    gp_type.add(pepperoni);
+	    gp_type.add(studentu);
+	    gp_type.add(salami);
+	    gp_type.add(hawaiian);
 	    
 	    pizzaTypes.add(pepperoni); // pievienojam checkbox pie jpanel
 	    pizzaTypes.add(studentu);
