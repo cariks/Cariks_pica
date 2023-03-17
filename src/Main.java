@@ -1,9 +1,7 @@
 
 public class Main {
-
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+		PizzaOrderingSystem main_log = new PizzaOrderingSystem();
+		main_log.newFrame();
+	} 
 }
