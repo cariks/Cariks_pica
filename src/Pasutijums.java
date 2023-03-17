@@ -22,6 +22,11 @@ public class Pasutijums extends JFrame {
 	  JCheckBoxMenuItem studentu = new JCheckBoxMenuItem("Studentu");
 	  JCheckBoxMenuItem salami = new JCheckBoxMenuItem("Salami");
 	  JCheckBoxMenuItem hawaiian = new JCheckBoxMenuItem("Hawaiian");
+	  
+	  JCheckBoxMenuItem bekons = new JCheckBoxMenuItem("Bekons");
+	  JCheckBoxMenuItem senes = new JCheckBoxMenuItem("Sçnes");
+	  JCheckBoxMenuItem extraSiers = new JCheckBoxMenuItem("Extra Siers");
+	  JCheckBoxMenuItem bbq = new JCheckBoxMenuItem("BBQ Mçrce");
 
 	  
 	public void veiktPasutijumu() {
@@ -47,7 +52,6 @@ public class Pasutijums extends JFrame {
 	    add(panel1);
 	    
 	    // ------------Picas izvçle
-
 	    JPanel pizzaTypes = new JPanel();
 	    pizzaTypes.setLayout(new GridLayout(5, 1));
 	    pizzaTypes.add(new JLabel("Picas veids"));
@@ -65,7 +69,19 @@ public class Pasutijums extends JFrame {
 	    pizzaTypes.setBounds(310, 20, 100, 100);
 	    add(pizzaTypes); // pievienojam jpanel
 	    
+	    //-------------Picas toppings izvçle
+	    JPanel pizzaToppings = new JPanel();
+	    pizzaToppings.setLayout(new GridLayout(5, 1));
+	    pizzaToppings.add(new JLabel("Picas toppings"));
+
+	    pizzaToppings.add(bekons);
+	    pizzaToppings.add(senes);
+	    pizzaToppings.add(extraSiers);
+	    pizzaToppings.add(bbq);
+	    pizzaToppings.setBounds(420, 20, 100, 100);
+	    add(pizzaToppings);
 	    
+	    //-------------Pasutijums loga iestatîjumi
 	    setVisible(true);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setSize(garums, platums);
