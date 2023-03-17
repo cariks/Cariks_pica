@@ -8,8 +8,10 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class Pasutijums extends JFrame {
 
@@ -112,6 +114,16 @@ public class Pasutijums extends JFrame {
 	    pievienotButton.add(apmaksat);
 	    pievienotButton.setBounds(580, 200, 120, 120);
 	    add(pievienotButton);
+	    
+	 // -------------Pievienots JTabel
+	    String[] rindas_n = { "saòemt uz vietas", "vârds", "t.numurs", "adrese", "p.veids", "p.toppings", "p.izmçrs" };
+	    String[][] kolonnas = {{}, {}, {}, {}, {}, {}, {}, {}, {} };
+	    DefaultTableModel dtm = new DefaultTableModel(kolonnas, rindas_n);
+	    table.setModel(dtm);
+	    JScrollPane sp = new JScrollPane(table);
+	    sp.setViewportView(table);
+	    sp.setBounds(50, 180, 510, 160);
+	    add(sp);
 
 	    
 	    //-------------Pasutijums loga iestatîjumi
@@ -126,5 +138,6 @@ public class Pasutijums extends JFrame {
 	JButton dzest = new JButton("Dzçst picu");
 	JButton apmaksat = new JButton("Apmaksât");
 	JButton addPizza = new JButton("Pievienot picu");
+	JTable table = new JTable();
 
 }
