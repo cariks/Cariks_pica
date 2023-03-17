@@ -1,6 +1,7 @@
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,21 +39,29 @@ public class PizzaOrderingSystem  implements ActionListener{
 	    frame.setSize(garums, platums);
 	    frame.setVisible(true);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-	    
-	    
-	    
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
-
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	}  
+	
+	public void apskatitPasutijumus() {
 		
 	}
 
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == jaunaisPasutijums) {
+		      Pasutijums main_log = new Pasutijums();
+		      main_log.veiktPasutijumu();
+		      frame.dispose(); // aizvert logu
+		    } else if (e.getSource() == apskatitPasutijumus) {
+		      apskatitPasutijumus();
+		    } else {
+		      int close = JOptionPane.showConfirmDialog(null, "Vai jus tieðam gribat aizvert programmu?", "?",
+		          JOptionPane.YES_NO_OPTION);
+		      if (close == JOptionPane.YES_OPTION) {
+		        frame.dispose();
+		      } else {
+		        JOptionPane.getRootFrame().dispose();
+		      }
+		    }
+	}
 }
