@@ -1,0 +1,18 @@
+Vârds: vards
+Numurs: numurs
+Adrese: adrese
+Picas: Pepperoni
+Toppings: bekons, 
+Izmçrs: 20 cm
+Summa: 38€
+--------------------------------
+
+Vârds: vards
+Numurs: numurs
+Adrese: adrese
+Picas: Pepperoni
+Toppings: bekons, 
+Izmçrs: 20 cm
+Summa: 12€
+--------------------------------
+
