@@ -1,5 +1,7 @@
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -7,13 +9,14 @@ import javax.swing.JCheckBox;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-public class Pasutijums extends JFrame {
+public class Pasutijums extends JFrame implements ActionListener{
 
 	  JTextField vards = new JTextField(20);
 	  JTextField numurs = new JTextField(20);
@@ -35,7 +38,9 @@ public class Pasutijums extends JFrame {
 	  JCheckBoxMenuItem cm20 = new JCheckBoxMenuItem("20 santimetri");
 	  JCheckBoxMenuItem cm30 = new JCheckBoxMenuItem("30 santimetri");
 	  JCheckBoxMenuItem cm40 = new JCheckBoxMenuItem("40 santimetri");
-
+	  
+	  int kopejasumma = 0;
+	  JLabel labelsumma = new JLabel("summa: "+kopejasumma);
 	  
 	public void veiktPasutijumu() {
 		int garums = 750;
@@ -59,6 +64,7 @@ public class Pasutijums extends JFrame {
 
 	    add(panel1);
 	    
+	    
 	    // ------------Picas izvçle
 	    JPanel pizzaTypes = new JPanel();
 	    pizzaTypes.setLayout(new GridLayout(5, 1));
@@ -77,6 +83,7 @@ public class Pasutijums extends JFrame {
 	    pizzaTypes.setBounds(310, 20, 100, 100);
 	    add(pizzaTypes); // pievienojam jpanel
 	    
+	    
 	    //-------------Picas toppings izvçle
 	    JPanel pizzaToppings = new JPanel();
 	    pizzaToppings.setLayout(new GridLayout(5, 1));
@@ -88,6 +95,7 @@ public class Pasutijums extends JFrame {
 	    pizzaToppings.add(bbq);
 	    pizzaToppings.setBounds(420, 20, 100, 100);
 	    add(pizzaToppings);
+	    
 	    
 	 // ------------Picas izmçra izvçle
 	    JPanel pizzaIzmers = new JPanel();
@@ -105,6 +113,7 @@ public class Pasutijums extends JFrame {
 	    pizzaIzmers.setBounds(560, 17, 100, 200);
 	    add(pizzaIzmers);
 	    
+	    
 	 // ------------Iespçja pievienot, dzest un apmaksât picu
 	    JPanel pievienotButton = new JPanel();
 
@@ -114,6 +123,7 @@ public class Pasutijums extends JFrame {
 	    pievienotButton.add(apmaksat);
 	    pievienotButton.setBounds(580, 200, 120, 120);
 	    add(pievienotButton);
+	    
 	    
 	 // -------------Pievienots JTabel
 	    String[] rindas_n = { "saòemt uz vietas", "vârds", "t.numurs", "adrese", "p.veids", "p.toppings", "p.izmçrs" };
@@ -139,5 +149,151 @@ public class Pasutijums extends JFrame {
 	JButton apmaksat = new JButton("Apmaksât");
 	JButton addPizza = new JButton("Pievienot picu");
 	JTable table = new JTable();
+	
+	int i = 0;
 
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		//--------------Parbaudîðana
+		if (e.getSource() == pasVeids) {
+		      if (pasVeids.isSelected()) {
+		        ievadLodzini.setVisible(false); // "uzòemt uz vietas" ir nospiests
+		      } else {
+		        ievadLodzini.setVisible(true); // "uzòemt uz vietas" nav nospiests
+		      }
+		    }
+		
+		//--------------Apmaksât
+		if(e.getSource( ) == apmaksat ){
+		      
+		      JOptionPane.showMessageDialog(null, "Picas ir apmaksâtas");
+		    }
+		
+		//--------------Pievienot picu
+		if (e.getSource() == addPizza) {
+			
+			
+		boolean kluda = false;
+		
+		table.setValueAt(pasVeids.isSelected(), i, 0);
+    	int summa = 0;
+    	if(!pasVeids.isSelected()) {
+    		summa+=3;
+    		
+    		//--------------Vârda parbaudîðana
+    		if (vards.getText().length() > 0)
+     		   table.setValueAt(vards.getText(), i, 1);
+     		else {
+     			JOptionPane.showMessageDialog(null, "Vards nav ierakstits!", "Kïûda", JOptionPane.ERROR_MESSAGE);
+     			for (int j = 0; j < 7; j++) {
+     				table.setValueAt(" ", i, j);
+     				}
+     			kluda = true;
+     			}
+    		
+    		//--------------Numura parbaudîðana
+    		if (numurs.getText().length() > 0 && !kluda)
+    			table.setValueAt(numurs.getText(), i, 2);
+    		else {
+    			JOptionPane.showMessageDialog(null, "Numurs nav ierakstits!", "Kïûda", JOptionPane.ERROR_MESSAGE);
+    			for (int j = 0; j < 7; j++) {
+    				table.setValueAt(" ", i, j);
+    				}
+    			kluda = true;
+    			}
+    		
+    		//--------------Adrese parbaudîðana
+    		if (adrese.getText().length() > 0 && !kluda)
+    			table.setValueAt(adrese.getText(), i, 3);
+    		else {
+    			JOptionPane.showMessageDialog(null, "Adrese nav ierakstita!", "Kïûda", JOptionPane.ERROR_MESSAGE);
+    			for (int j = 0; j < 7; j++) {
+    				table.setValueAt(" ", i, j);
+    				}
+    			kluda = true;
+    			}
+    		}
+    	
+    	//--------------Picas parbaudîðana
+    	if (pepperoni.isSelected() && !kluda) {
+    		table.setValueAt("Pepperoni", i, 4);
+    		summa+=7;
+    		
+    	} else if (studentu.isSelected() && !kluda) {
+    		table.setValueAt("Studentu", i, 4);
+    		summa+=6;
+    			
+    	} else if (salami.isSelected()&& !kluda) {
+    		table.setValueAt("Salami", i, 4);
+    		summa+=7;
+    		
+    	} else if (hawaiian.isSelected()&& !kluda) {
+    		table.setValueAt("Hawaiian", i, 4);
+    		summa+=7;
+    		
+    	} else {
+    		JOptionPane.showMessageDialog(null, "Pica nav izvçlçta", "Kïûda", JOptionPane.ERROR_MESSAGE);
+    		for (int j = 0; j < 7; j++) {
+    			table.setValueAt(" ", i, j);
+    		}
+        kluda = true;
+      }
+    	
+    	//--------------Toppinga parbaudîðana
+    	String str = "";
+        if (bekons.isSelected()&& !kluda) {
+          str += "bekons, ";
+          summa+=2;
+        }
+        if (extraSiers.isSelected()&& !kluda) {
+          str += "extra siers, ";
+          summa+=2;
+        }
+        if (senes.isSelected()&& !kluda) {
+          str += "sçnes, ";
+          summa+=2;
+        }
+        if (bbq.isSelected()&& !kluda) {
+          str += "BBQ mçrce, ";
+          summa+=1;
+        }
+        table.setValueAt(str, i, 5);
+        
+        //--------------Picas izmçra parbaudîðana
+        if (cm20.isSelected()&& !kluda) {
+            table.setValueAt("20 cm", i, 6);
+            summa+=0;
+          } else if (cm30.isSelected()&& !kluda) {
+            table.setValueAt("30 cm", i, 6);
+            summa+=2;
+          } else if (cm40.isSelected()&& !kluda) {
+            table.setValueAt("40 cm", i, 6);
+            summa+=4;
+          } else {
+            JOptionPane.showMessageDialog(null, "Izmçrs nav izvçlçts", "Kïûda", JOptionPane.ERROR_MESSAGE);
+            for (int j = 0; j < 7; j++) {
+              table.setValueAt(" ", i, j);
+            }
+            kluda = true;
+          }//esli vsjo pravilno to v kopejasumma dobavlajetsa summa i menjaetsa summas tekst
+        
+        
+        //--------------Kopçjâs summas apreíinâðana un pievienoðana
+        if (!kluda) {
+      	  i++;
+      	  kopejasumma+=summa;
+      	  labelsumma.setText("Summa: "+kopejasumma);
+        }
+      }
+	
+	//-----------------Rindas dzçðana
+    if (e.getSource() == dzest) {
+    	
+    	
+    }
+  }
 }
+
+
