@@ -42,7 +42,7 @@ public class PizzaOrderingSystem  implements ActionListener{
 	}  
 	
 	public void apskatitPasutijumus() {
-		
+		new ApskatitFailu();
 	}
 
 

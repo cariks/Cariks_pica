@@ -2,6 +2,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -16,8 +18,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+
 public class Pasutijums extends JFrame implements ActionListener{
 
+	  String[][] kolonnas;
+	  DefaultTableModel dtm;
 	  JTextField vards = new JTextField(20);
 	  JTextField numurs = new JTextField(20);
 	  JTextField adrese = new JTextField(25);
@@ -25,31 +30,32 @@ public class Pasutijums extends JFrame implements ActionListener{
 
 	  JPanel ievadLodzini = new JPanel();
 	  
-	  JCheckBoxMenuItem pepperoni = new JCheckBoxMenuItem("Pepperoni");
-	  JCheckBoxMenuItem studentu = new JCheckBoxMenuItem("Studentu");
-	  JCheckBoxMenuItem salami = new JCheckBoxMenuItem("Salami");
-	  JCheckBoxMenuItem hawaiian = new JCheckBoxMenuItem("Hawaiian");
+	  JCheckBoxMenuItem pepperoni = new JCheckBoxMenuItem("Pepperoni - 7eur");
+	  JCheckBoxMenuItem studentu = new JCheckBoxMenuItem("Studentu - 6eur");
+	  JCheckBoxMenuItem salami = new JCheckBoxMenuItem("Salami - 7eur");
+	  JCheckBoxMenuItem hawaiian = new JCheckBoxMenuItem("Hawaiian - 7eur");
 	  
-	  JCheckBoxMenuItem bekons = new JCheckBoxMenuItem("Bekons");
-	  JCheckBoxMenuItem senes = new JCheckBoxMenuItem("Sçnes");
-	  JCheckBoxMenuItem extraSiers = new JCheckBoxMenuItem("Extra Siers");
-	  JCheckBoxMenuItem bbq = new JCheckBoxMenuItem("BBQ Mçrce");
+	  JCheckBoxMenuItem bekons = new JCheckBoxMenuItem("Bekons +2eur");
+	  JCheckBoxMenuItem senes = new JCheckBoxMenuItem("Sçnes +2eur");
+	  JCheckBoxMenuItem extraSiers = new JCheckBoxMenuItem("Extra Siers +2eur");
+	  JCheckBoxMenuItem bbq = new JCheckBoxMenuItem("BBQ Mçrce +1eur");
 	  
 	  JCheckBoxMenuItem cm20 = new JCheckBoxMenuItem("20 santimetri");
-	  JCheckBoxMenuItem cm30 = new JCheckBoxMenuItem("30 santimetri");
-	  JCheckBoxMenuItem cm40 = new JCheckBoxMenuItem("40 santimetri");
+	  JCheckBoxMenuItem cm30 = new JCheckBoxMenuItem("30 santimetri +2eur");
+	  JCheckBoxMenuItem cm40 = new JCheckBoxMenuItem("40 santimetri +4eur");
 	  
 	  int kopejasumma = 0;
 	  JLabel labelsumma = new JLabel("summa: "+kopejasumma);
 	  
 	public void veiktPasutijumu() {
-		int garums = 750;
+		int garums = 800;
 	    int platums = 400;
 	    setLayout(null);
 	    
-	    ievadLodzini.setLayout(new GridLayout(6, 1));
-	    ievadLodzini.add(new JLabel("Vârds")); // loga "nosaukums"
-	    ievadLodzini.add(vards); // logs
+	    ievadLodzini.setLayout(new GridLayout(7, 1));
+	    ievadLodzini.add(new JLabel("(Piegâde +3 euro)"));
+	    ievadLodzini.add(new JLabel("Vârds"));
+	    ievadLodzini.add(vards);
 	    ievadLodzini.add(new JLabel("Tâlr.nr."));
 	    ievadLodzini.add(numurs);
 	    ievadLodzini.add(new JLabel("Adrese"));
@@ -59,7 +65,8 @@ public class Pasutijums extends JFrame implements ActionListener{
 	    panel1.setLayout(new FlowLayout());
 	    panel1.add(ievadLodzini);
 	    panel1.add(pasVeids);
-	    panel1.setBounds(10, 10, 300, 300);
+	    panel1.setBounds(10, 10, 330, 300);
+	    pasVeids.addActionListener(this);
 
 
 	    add(panel1);
@@ -70,18 +77,18 @@ public class Pasutijums extends JFrame implements ActionListener{
 	    pizzaTypes.setLayout(new GridLayout(5, 1));
 	    pizzaTypes.add(new JLabel("Picas veids"));
 	    
-	    ButtonGroup gp_type = new ButtonGroup(); // picas veidi grupa
+	    ButtonGroup gp_type = new ButtonGroup();
 	    gp_type.add(pepperoni);
 	    gp_type.add(studentu);
 	    gp_type.add(salami);
 	    gp_type.add(hawaiian);
 	    
-	    pizzaTypes.add(pepperoni); // pievienojam checkbox pie jpanel
+	    pizzaTypes.add(pepperoni);
 	    pizzaTypes.add(studentu);
 	    pizzaTypes.add(salami);
 	    pizzaTypes.add(hawaiian);
-	    pizzaTypes.setBounds(310, 20, 100, 100);
-	    add(pizzaTypes); // pievienojam jpanel
+	    pizzaTypes.setBounds(340, 20, 130, 100);
+	    add(pizzaTypes);
 	    
 	    
 	    //-------------Picas toppings izvçle
@@ -93,13 +100,13 @@ public class Pasutijums extends JFrame implements ActionListener{
 	    pizzaToppings.add(senes);
 	    pizzaToppings.add(extraSiers);
 	    pizzaToppings.add(bbq);
-	    pizzaToppings.setBounds(420, 20, 100, 100);
+	    pizzaToppings.setBounds(470, 20, 130, 100);
 	    add(pizzaToppings);
 	    
 	    
 	 // ------------Picas izmçra izvçle
 	    JPanel pizzaIzmers = new JPanel();
-	    pizzaIzmers.setLayout(new FlowLayout());
+	    pizzaIzmers.setLayout(new FlowLayout(FlowLayout.LEFT));
 	    pizzaIzmers.add(new JLabel("Picas izmçrs"));
 	    ButtonGroup gp_cm = new ButtonGroup();
 
@@ -110,7 +117,7 @@ public class Pasutijums extends JFrame implements ActionListener{
 	    pizzaIzmers.add(cm20);
 	    pizzaIzmers.add(cm30);
 	    pizzaIzmers.add(cm40);
-	    pizzaIzmers.setBounds(560, 17, 100, 200);
+	    pizzaIzmers.setBounds(600, 17, 150, 200);
 	    add(pizzaIzmers);
 	    
 	    
@@ -121,18 +128,22 @@ public class Pasutijums extends JFrame implements ActionListener{
 	    pievienotButton.add(addPizza);
 	    pievienotButton.add(dzest);
 	    pievienotButton.add(apmaksat);
+	    pievienotButton.add(labelsumma);
 	    pievienotButton.setBounds(580, 200, 120, 120);
 	    add(pievienotButton);
+	    addPizza.addActionListener(this);
+	    apmaksat.addActionListener(this);
+	    dzest.addActionListener(this);
 	    
 	    
 	 // -------------Pievienots JTabel
 	    String[] rindas_n = { "saòemt uz vietas", "vârds", "t.numurs", "adrese", "p.veids", "p.toppings", "p.izmçrs" };
-	    String[][] kolonnas = {{}, {}, {}, {}, {}, {}, {}, {}, {} };
-	    DefaultTableModel dtm = new DefaultTableModel(kolonnas, rindas_n);
+	    kolonnas = new String[rowCount][rindas_n.length];
+	    dtm = new DefaultTableModel(kolonnas, rindas_n);
 	    table.setModel(dtm);
 	    JScrollPane sp = new JScrollPane(table);
 	    sp.setViewportView(table);
-	    sp.setBounds(50, 180, 510, 160);
+	    sp.setBounds(50, 190, 510, 160);
 	    add(sp);
 
 	    
@@ -141,8 +152,6 @@ public class Pasutijums extends JFrame implements ActionListener{
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    setSize(garums, platums);
 	    setLocation(1920 / 2 - garums / 2, 1080 / 2 - platums / 2);
-	    
-	    
 	}
 	
 	JButton dzest = new JButton("Dzçst picu");
@@ -151,8 +160,35 @@ public class Pasutijums extends JFrame implements ActionListener{
 	JTable table = new JTable();
 	
 	int i = 0;
+	int rowCount = 3;
 
-
+	public void writeFile(){
+		try{
+			FileWriter fw = new FileWriter("maksajums.txt", true);
+			PrintWriter wr = new PrintWriter(fw);
+			int j = 0;
+			String str = null;
+			do{
+				if(table.getValueAt(j, 2)!=null){
+					j++;
+				}
+			}while(table.getValueAt(j, 2)!=null);
+		      for(int k = 0; k<j; k++){
+		    	  wr.println("Vârds: "+((String)table.getValueAt(k,1))
+		    			  +"\nNumurs: "+(String)table.getValueAt(k,2)
+		    			  +"\nAdrese: "+(String)table.getValueAt(k,3)
+		                  +"\nPicas: "+(String)table.getValueAt(k,4)
+		                  +"\nToppings: "+(String)table.getValueAt(k,5)
+		                  +"\nIzmçrs: "+(String)table.getValueAt(k,6)+""
+		                  +"\n"+labelsumma.getText()+"€\n"
+		                  +"--------------------------------\n");			
+		    	  }
+		      wr.close();
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, "Kïuda", "Kïûda", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -167,14 +203,23 @@ public class Pasutijums extends JFrame implements ActionListener{
 		
 		//--------------Apmaksât
 		if(e.getSource( ) == apmaksat ){
-		      
-		      JOptionPane.showMessageDialog(null, "Picas ir apmaksâtas");
-		    }
+			this.dispose();
+			
+			PizzaOrderingSystem obj = new PizzaOrderingSystem();
+			obj.newFrame();
+			writeFile();
+			new ApskatitFailu();
+			JOptionPane.showMessageDialog(null, "Picas ir apmaksâtas");
+		}
 		
 		//--------------Pievienot picu
 		if (e.getSource() == addPizza) {
-			
-			
+			if(i>=3) {
+	    		rowCount++;
+	    		String[][] newRow = new String[rowCount][7];
+	    		newRow = swapArray(newRow, kolonnas);
+	    		dtm.addRow(newRow);
+	    	}
 		boolean kluda = false;
 		
 		table.setValueAt(pasVeids.isSelected(), i, 0);
@@ -182,7 +227,7 @@ public class Pasutijums extends JFrame implements ActionListener{
     	if(!pasVeids.isSelected()) {
     		summa+=3;
     		
-    		//--------------Vârda parbaudîðana
+    		//--------------Vârda pârbaudîðana
     		if (vards.getText().length() > 0)
      		   table.setValueAt(vards.getText(), i, 1);
      		else {
@@ -193,7 +238,7 @@ public class Pasutijums extends JFrame implements ActionListener{
      			kluda = true;
      			}
     		
-    		//--------------Numura parbaudîðana
+    		//--------------Numura pârbaudîðana
     		if (numurs.getText().length() > 0 && !kluda)
     			table.setValueAt(numurs.getText(), i, 2);
     		else {
@@ -204,7 +249,7 @@ public class Pasutijums extends JFrame implements ActionListener{
     			kluda = true;
     			}
     		
-    		//--------------Adrese parbaudîðana
+    		//--------------Adrese pârbaudîðana
     		if (adrese.getText().length() > 0 && !kluda)
     			table.setValueAt(adrese.getText(), i, 3);
     		else {
@@ -216,7 +261,7 @@ public class Pasutijums extends JFrame implements ActionListener{
     			}
     		}
     	
-    	//--------------Picas parbaudîðana
+    	//--------------Picas pârbaudîðana
     	if (pepperoni.isSelected() && !kluda) {
     		table.setValueAt("Pepperoni", i, 4);
     		summa+=7;
@@ -241,7 +286,7 @@ public class Pasutijums extends JFrame implements ActionListener{
         kluda = true;
       }
     	
-    	//--------------Toppinga parbaudîðana
+    	//--------------Toppinga pârbaudîðana
     	String str = "";
         if (bekons.isSelected()&& !kluda) {
           str += "bekons, ";
@@ -261,7 +306,7 @@ public class Pasutijums extends JFrame implements ActionListener{
         }
         table.setValueAt(str, i, 5);
         
-        //--------------Picas izmçra parbaudîðana
+        //--------------Picas izmçra pârbaudîðana
         if (cm20.isSelected()&& !kluda) {
             table.setValueAt("20 cm", i, 6);
             summa+=0;
@@ -277,7 +322,7 @@ public class Pasutijums extends JFrame implements ActionListener{
               table.setValueAt(" ", i, j);
             }
             kluda = true;
-          }//esli vsjo pravilno to v kopejasumma dobavlajetsa summa i menjaetsa summas tekst
+          }
         
         
         //--------------Kopçjâs summas apreíinâðana un pievienoðana
@@ -289,11 +334,36 @@ public class Pasutijums extends JFrame implements ActionListener{
       }
 	
 	//-----------------Rindas dzçðana
-    if (e.getSource() == dzest) {
-    	
-    	
-    }
-  }
+		if (e.getSource() == dzest) {
+			try{
+				int rowIndex = Integer.parseInt(JOptionPane.showInputDialog("Ievadi rindas kârtas numuru, kuru jânodzçð:"));
+		    	rowIndex--;
+		    	dtm.removeRow(rowIndex);
+			}catch(Exception e1){
+				JOptionPane.showMessageDialog(null, "Kïuda", "Kïûda", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+
+	//------------------JTable jaunu rindu pievienoðana
+	String[][] swapArray(String[][] a, String[][] b) {
+		String[] temp = new String[a.length*a[0].length];
+		 int counter = 0;
+		 for(int i = 0; i<b.length; i++) {
+			 for(int j=0; j<b[i].length; j++) {
+				 temp[counter] = b[i][j];
+				 counter++;
+				 }
+			 }
+		 counter = 0;
+		 for(int i = 0; i<a.length; i++) {
+			 for(int j = 0; j<a[i].length; j++) {
+				 if(counter+1<temp.length) {
+					 a[i][j] = temp[counter];
+					 counter++;				 
+					 }
+				 }
+			 }
+		 return a;
+		 }
 }
-
-
