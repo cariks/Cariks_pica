@@ -45,6 +45,8 @@ public class Pasutijums extends JFrame implements ActionListener{
 	  JCheckBoxMenuItem cm40 = new JCheckBoxMenuItem("40 santimetri +4eur");
 	  
 	  int kopejasumma = 0;
+	  int newsumma = 0;
+	  
 	  JLabel labelsumma = new JLabel("summa: "+kopejasumma);
 	  
 	public void veiktPasutijumu() {
@@ -201,16 +203,7 @@ public class Pasutijums extends JFrame implements ActionListener{
 		      }
 		    }
 		
-		//--------------Apmaksât
-		if(e.getSource( ) == apmaksat ){
-			this.dispose();
-			
-			PizzaOrderingSystem obj = new PizzaOrderingSystem();
-			obj.newFrame();
-			writeFile();
-			new ApskatitFailu();
-			JOptionPane.showMessageDialog(null, "Picas ir apmaksâtas");
-		}
+		
 		
 		//--------------Pievienot picu
 		if (e.getSource() == addPizza) {
@@ -225,7 +218,8 @@ public class Pasutijums extends JFrame implements ActionListener{
 		table.setValueAt(pasVeids.isSelected(), i, 0);
     	int summa = 0;
     	if(!pasVeids.isSelected()) {
-    		summa+=3;
+    		//summa+=3;
+    		newsumma+=3;
     		
     		//--------------Vârda pârbaudîðana
     		if (vards.getText().length() > 0)
@@ -264,19 +258,23 @@ public class Pasutijums extends JFrame implements ActionListener{
     	//--------------Picas pârbaudîðana
     	if (pepperoni.isSelected() && !kluda) {
     		table.setValueAt("Pepperoni", i, 4);
-    		summa+=7;
+    		//summa+=7;
+    		newsumma+=7;
     		
     	} else if (studentu.isSelected() && !kluda) {
     		table.setValueAt("Studentu", i, 4);
-    		summa+=6;
+    		//summa+=6;
+    		newsumma+=6;
     			
     	} else if (salami.isSelected()&& !kluda) {
     		table.setValueAt("Salami", i, 4);
-    		summa+=7;
+    		//summa+=7;
+    		newsumma+=7;
     		
     	} else if (hawaiian.isSelected()&& !kluda) {
     		table.setValueAt("Hawaiian", i, 4);
-    		summa+=7;
+    		//summa+=7;
+    		newsumma+=7;
     		
     	} else {
     		JOptionPane.showMessageDialog(null, "Pica nav izvçlçta", "Kïûda", JOptionPane.ERROR_MESSAGE);
@@ -290,32 +288,39 @@ public class Pasutijums extends JFrame implements ActionListener{
     	String str = "";
         if (bekons.isSelected()&& !kluda) {
           str += "bekons, ";
-          summa+=2;
+          //summa+=2;
+          newsumma+=2;
         }
         if (extraSiers.isSelected()&& !kluda) {
           str += "extra siers, ";
-          summa+=2;
+          //summa+=2;
+          newsumma+=2;
         }
         if (senes.isSelected()&& !kluda) {
           str += "sçnes, ";
-          summa+=2;
+          //summa+=2;
+          newsumma+=2;
         }
         if (bbq.isSelected()&& !kluda) {
           str += "BBQ mçrce, ";
-          summa+=1;
+          //summa+=1;
+          newsumma+=1;
         }
         table.setValueAt(str, i, 5);
         
         //--------------Picas izmçra pârbaudîðana
         if (cm20.isSelected()&& !kluda) {
             table.setValueAt("20 cm", i, 6);
-            summa+=0;
+            //summa+=0;
+            newsumma+=0;
           } else if (cm30.isSelected()&& !kluda) {
             table.setValueAt("30 cm", i, 6);
-            summa+=2;
+            //summa+=2;
+            newsumma+=2;
           } else if (cm40.isSelected()&& !kluda) {
             table.setValueAt("40 cm", i, 6);
-            summa+=4;
+            //summa+=4;
+            newsumma+=4;
           } else {
             JOptionPane.showMessageDialog(null, "Izmçrs nav izvçlçts", "Kïûda", JOptionPane.ERROR_MESSAGE);
             for (int j = 0; j < 7; j++) {
@@ -328,7 +333,8 @@ public class Pasutijums extends JFrame implements ActionListener{
         //--------------Kopçjâs summas apreíinâðana un pievienoðana
         if (!kluda) {
       	  i++;
-      	  kopejasumma+=summa;
+      	  kopejasumma += newsumma;
+      	  //kopejasumma+=summa;
       	  labelsumma.setText("Summa: "+kopejasumma);
         }
       }
@@ -338,11 +344,23 @@ public class Pasutijums extends JFrame implements ActionListener{
 			try{
 				int rowIndex = Integer.parseInt(JOptionPane.showInputDialog("Ievadi rindas kârtas numuru, kuru jânodzçð:"));
 		    	rowIndex--;
+		    	kopejasumma -= newsumma;
 		    	dtm.removeRow(rowIndex);
 			}catch(Exception e1){
 				JOptionPane.showMessageDialog(null, "Kïuda", "Kïûda", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		
+		//--------------Apmaksât
+				if(e.getSource( ) == apmaksat ){
+					this.dispose();
+					
+					PizzaOrderingSystem obj = new PizzaOrderingSystem();
+					obj.newFrame();
+					writeFile();
+					new ApskatitFailu();
+					JOptionPane.showMessageDialog(null, "Picas ir apmaksâtas");
+				}
 	}
 
 	//------------------JTable jaunu rindu pievienoðana

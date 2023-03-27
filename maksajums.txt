@@ -1,18 +1,36 @@
-Vârds: vards
+Vârds: vards123
 Numurs: numurs
 Adrese: adrese
-Picas: Pepperoni
-Toppings: bekons, 
-Izmçrs: 20 cm
-Summa: 24€
+Picas: Hawaiian
+Toppings: BBQ mçrce, 
+Izmçrs: 40 cm
+Summa: 27€
 --------------------------------
 
 Vârds: vards
 Numurs: numurs
 Adrese: adrese
-Picas: Pepperoni
+Picas: Hawaiian
+Toppings: BBQ mçrce, 
+Izmçrs: 40 cm
+Summa: 27€
+--------------------------------
+
+Vârds: vards
+Numurs: numurs
+Adrese: adrese
+Picas: Hawaiian
+Toppings: BBQ mçrce, 
+Izmçrs: 40 cm
+Summa: 27€
+--------------------------------
+
+Vârds: vards
+Numurs: numurs
+Adrese: adrese
+Picas: Studentu
 Toppings: bekons, 
 Izmçrs: 20 cm
-Summa: 24€
+Summa: 33€
 --------------------------------
 
