@@ -11,6 +11,6 @@ Es izveidoju programmu, kurā jūs varat izvēlēties piegādes veidu, izvēlēt
  - [x] - Izveidota java programma no noteitkiem nosacījumeim.
  - [x] - Programma pievienota github
  - [x] - Izvedots fails README.md un apraksts
- - [x] - Programma ir papildināta
+ - [ ] - Programma ir papildināta
  - [x] - Darbs ir atsūtīts skolotājam 
  
