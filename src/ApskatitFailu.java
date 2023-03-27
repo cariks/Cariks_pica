@@ -21,10 +21,10 @@ public class ApskatitFailu extends JFrame{
               BufferedReader reader = new BufferedReader(fr);
 
               String line, str = "";
-              while ((line = reader.readLine()) != null) {		//poka ne zakon4itsa fajl
-              str += line + "\n";							//zapisivaet v string str
+              while ((line = reader.readLine()) != null) {	
+              str += line + "\n";
               }
-              area.setText(str);						//vivodit na ekran
+              area.setText(str);
               reader.close();
             } catch (Exception e) {
               JOptionPane.showMessageDialog(null, "Kïuda");
